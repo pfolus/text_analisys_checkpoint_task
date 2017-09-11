@@ -1,15 +1,19 @@
-import java.util.iterator;
+package controller;
+
+import java.util.Iterator;
+import java.util.ArrayList;
 
 public class CharIterator implements Iterator {
-    int index;
+    private int index;
+    public ArrayList<String> chars;
 
     public CharIterator(FileContent content) {
-
+        this.chars = content.getCharsList();
     }
 
     @Override
     public boolean hasNext() {
-       if(index < ####.size()){
+       if(index < this.chars.size()){
           return true;
        }
        return false;
@@ -18,7 +22,7 @@ public class CharIterator implements Iterator {
     @Override
     public Object next() {
        if(this.hasNext()){
-          return ####.get(index++);
+          return this.chars.get(index++);
        }
        return null;
    }

@@ -1,15 +1,19 @@
+package controller;
+
 import java.util.Iterator;
+import java.util.ArrayList;
 
 public class WordIterator implements Iterator {
-    int index;
+    private int index;
+    public ArrayList<String> words;
 
     public WordIterator(FileContent content) {
-
+        this.words = content.getWordsList();
     }
 
     @Override
     public boolean hasNext() {
-       if(index < ####.size()){
+       if(index < this.words.size()){
           return true;
        }
        return false;
@@ -18,7 +22,7 @@ public class WordIterator implements Iterator {
     @Override
     public Object next() {
        if(this.hasNext()){
-          return ####.get(index++);
+          return this.words.get(index++);
        }
        return null;
    }
