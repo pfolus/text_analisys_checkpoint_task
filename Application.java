@@ -3,6 +3,7 @@ import controller.FileContent;
 import controller.IterableText;
 import controller.StatisticalAnalisys;
 import controller.WordIterator;
+import view.View;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -18,14 +19,23 @@ public class Application {
             files.put(i, file);
         }
 
-        FileContent file1 = new FileContent(args[0]);
-        Iterator wi1 = file1.wordIterator();
-        Iterator ci1 = file1.charIterator();
-        StatisticalAnalisys sa1 = new StatisticalAnalisys(wi1);
-        StatisticalAnalisys sa2 = new StatisticalAnalisys(ci1);
-        System.out.println(sa1.dictionarySize());
-        System.out.println(sa2.dictionarySize());
+        for(Map.Entry<Integer, FileContent> entry:files.entrySet()){
+            int key=entry.getKey();
+            FileContent file = entry.getValue();
+            Iterator wordIterator = file.wordIterator();
+            Iterator charIterator = file.charIterator();
 
+            StatisticalAnalisys wordAnalisys = new StatisticalAnalisys(wordIterator);
+            StatisticalAnalisys charAnalisys = new StatisticalAnalisys(charIterator);
+
+            View.print("\n");
+            View.print("==" + file.getFileName() + "==");
+            View.print("\n");
+            View.print("Char count: " + charAnalisys.size());
+            View.print("Word count: " + wordAnalisys.size());
+            View.print("Unique words: " + wordAnalisys.dictionarySize());
+            View.print("Vovels %: " + charAnalisys.getVowelsPercentage());
+
+        }
     }
-
 }
